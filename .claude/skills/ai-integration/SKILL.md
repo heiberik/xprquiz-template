@@ -2,9 +2,8 @@
 name: ai-integration
 description: >
   OpenRouter and Vercel AI SDK integration patterns for AI-powered quiz question generation.
-  Covers provider setup, model selection (openai/gpt-5.4-mini via OpenRouter), generateText
-  with manual JSON parsing (not generateObject), prompt engineering techniques, and Zod
-  output validation.
+  Covers provider setup, model selection (openai/gpt-5.4-mini via OpenRouter), generateObject
+  with Zod schema for structured output, prompt engineering techniques, and output validation.
 user-invocable: false
 paths:
   - src/lib/ai.ts

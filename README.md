@@ -13,7 +13,7 @@ Template-repo for live-koding av XprQuiz med Claude Code.
 
 - `CLAUDE.md` — Prosjektdokumentasjon som Claude Code leser og følger
 - `.claude/skills/` — Oppskrifter for API-ruter og AI-integrasjon (SKILL.md-format med frontmatter)
-- `.claude/settings.json` — Pre-konfigurerte hooks (blokkér .env-lesing, auto-format med Prettier)
+- `.claude/settings.json` — Pre-konfigurerte hooks (blokkér .env-lesing)
 - `.claude/hooks/` — Hook-scripts som kjøres automatisk
 - `.env.example` — Template for environment variables
 

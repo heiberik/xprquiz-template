@@ -16,7 +16,7 @@
 ### 3. Scaffold (~7 min)
 - Claude leser CLAUDE.md og scaffolder Next.js + deps + DB-schema
 - Snakk om: hva er en kodeassistent? Tokens inn, tokens ut, verktøy = agent
-- Vis at Prettier-hook kjører automatisk på filene Claude lager
+- Vis at .env-hooken blokkerer lesing av hemmeligheter
 
 ### 4. Auth — Better Auth (~8 min)
 - Vis https://better-auth.com/ — "Produkter er nå AI/agent-first"
@@ -91,9 +91,8 @@ Sørg for at `.env.local` finnes med gyldige verdier (denne er IKKE i repoet).
 Vis `.claude/settings.json` og hooks-mappen:
 
 > "Vi har også hooks — automatiske handlinger som kjører når Claude bruker
-> verktøy. Én hook blokkerer lesing av .env-filer — hemmeligheter skal ikke
-> inn i samtalen. En annen kjører Prettier automatisk etter hver filendring.
-> La meg vise dere."
+> verktøy. Denne hooken blokkerer lesing av .env-filer — hemmeligheter skal ikke
+> inn i samtalen. La meg vise dere."
 
 **Demo hook live:** Skriv i Claude Code:
 ```
@@ -137,7 +136,6 @@ Gjør alt i rekkefølge. Stopp etter at database-schema er pushet.
 
 ### Vis output
 - Vis at filstrukturen matcher CLAUDE.md
-- Vis at Prettier-hooken kjørte automatisk på filene Claude lagde
 
 ---
 
@@ -204,8 +202,7 @@ Modell: openai/gpt-5.4-mini
 Lag src/app/api/generate-questions/route.ts:
 
 POST-rute som tar { topic: string }
-Kaller generate-questions og lagrer spørsmålene i DB
-Følg arkitekturen beskrevet i CLAUDE.md
+Kaller generate-questions og returnerer spørsmålene som JSON (IKKE lagre i DB — det finnes ingen game ennå, lagring bygges i game engine-fasen)
 
 Start dev-serveren og test med curl:
 curl -X POST http://localhost:3000/api/generate-questions \
@@ -214,7 +211,7 @@ curl -X POST http://localhost:3000/api/generate-questions \
 Vis meg resultatet.
 
 ### Snakkepunkter
-- Vis tabellen fra `ai-integration/SKILL.md`: "Seks prompt engineering-teknikker i én prompt"
+- Vis tabellen fra `ai-integration/SKILL.md`: "Fem prompt engineering-teknikker i én prompt"
 - Rolle-setting, Chain of Thought, Few-shot, Output-format, Negative constraints
 - "Se — Claude leser skills-filen automatisk fordi den jobber med filer under src/lib/ai/"
 
@@ -352,7 +349,7 @@ Kjør deretter npm run build for å verifisere at prosjektet bygger uten feil.
 ### Snakkepunkter
 - "Iterativ utvikling — vi tester og fikser i sanntid"
 - Hvis noe feiler: "Se — Claude feilsøker selv. Den leser feilmeldingen og retter opp"
-- Vis at Prettier-hooken kjører automatisk når Claude fikser filer
+- "Claude itererer — leser feil, retter, tester igjen"
 - Vis Drizzle Studio for å se data i databasen
 
 ---
