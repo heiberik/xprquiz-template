@@ -16,11 +16,13 @@ Live quiz-app der publikum spiller på mobilen i sanntid. AI genererer spørsmå
 
 Serverless-kompatibel. All game state lagres i Postgres med timestamps — ingen server som tikker.
 
-- Klienter poller `GET /api/game-state` hvert 2. sekund
+- Klienter poller `GET /api/game-state` hvert sekund
 - Game state beregnes fra timestamps ved hver request (ingen cron jobs)
+- Klienten beregner nedtelling lokalt fra timestamps mellom polls for jevn UI — poll-responsen korrigerer/synkroniserer
 - Poll-requests driver spillet fremover: hvis beregnet state viser at tiden er ute, trigger requesten selv overgangen
 - Atomiske `UPDATE ... WHERE status = 'expected'` for å unngå race conditions — `rowCount === 0` betyr at en annen request allerede tok overgangen, gjør ingenting
-- `countdown → generating` og `round_ended → generating` trigger AI-spørsmålsgenerering — kun requesten som vinner den atomiske overgangen starter genereringen
+- `countdown → generating` og `topic_selection → generating` trigger AI-spørsmålsgenerering — kun requesten som vinner den atomiske overgangen starter genereringen
+- En spiller regnes som aktiv hvis de har pollet i løpet av de siste 10 sekundene — spillet går til `waiting_for_players` når ingen aktive spillere gjenstår
 - `correctIndex` sendes ALDRI til klienten under `question_active` — kun under `showing_answer`
 - Scoring: raskere svar = mer poeng. Maks 1000, min 100, lineær interpolering basert på tid brukt
 - Én enkelt side (`src/app/page.tsx`) med ulike visninger basert på game state
@@ -41,22 +43,28 @@ Spillere må logge inn for å spille. Better Auth håndterer autentisering:
 
 ## State Machine
 waiting_for_players
-→ countdown (5s)                    [triggers ved 2+ spillere]
-→ generating                      [AI lager 3 spørsmål]
-→ question_active (15s)         [spørsmål 1]
-→ showing_answer (4s)
-→ question_active (15s)     [spørsmål 2]
-→ showing_answer (4s)
-→ question_active (15s) [spørsmål 3]
-→ showing_answer (4s)
-→ round_ended (5s)  [vis leaderboard]
-→ generating      [neste runde, nytt tema]
-→ ...
-→ game_over   [etter 5 runder]
+→ countdown (5s)                    [triggers ved 1+ spillere]
+→ generating                      [AI lager 3 spørsmål, tilfeldig tema første gang]
+→ question_active (10s)         [spørsmål 1, 4 alternativer]
+→ showing_answer (3s)
+→ question_active (10s)     [spørsmål 2, 4 alternativer]
+→ showing_answer (3s)
+→ question_active (10s) [spørsmål 3, 4 alternativer]
+→ showing_answer (3s)
+→ topic_selection (15s)  [vis leaderboard + vinneren av denne runden velger neste tema]
+→ generating             [AI lager 3 nye spørsmål basert på valgt tema]
+→ ...                    [løkke fortsetter]
+→ waiting_for_players    [når ingen aktive spillere gjenstår]
 
-Spillet starter automatisk når 2+ spillere har joinet.
-Hvert spørsmål varer 15 sekunder. Etter siste svar vises riktig svar i 4 sekunder.
-Hver runde har 3 spørsmål. Etter 5 runder er spillet over.
+Ingen runder eller `game_over` — spillet kjører kontinuerlig i en løkke: 3 spørsmål → leaderboard + temavalg → 3 spørsmål → ...
+Spillet starter automatisk når første spiller joiner. Ingen admin-funksjonalitet.
+Spillet stopper og går tilbake til `waiting_for_players` når ingen spillere har pollet de siste 10 sekundene.
+
+**Temavalg:** Etter hver runde med 3 spørsmål får spilleren med høyest score på den runden 15 sekunder til å velge neste tema via fritekst-input (`POST /api/select-topic`). Hvis vinneren ikke velger innen tiden, velger AI et tilfeldig tema.
+
+**Scoring:** Poeng nullstilles etter hver 3-spørsmålsrunde. Leaderboardet i `topic_selection` viser kun poeng fra de siste 3 spørsmålene.
+
+**Aktivitet:** Hver spiller har en `last_polled_at`-timestamp som oppdateres ved hver `GET /api/game-state`-request. Spillere som ikke har pollet innen `INACTIVE_TIMEOUT` regnes som inaktive.
 
 Spillere må være innlogget for å se `waiting_for_players`-skjermen og joine.
 
@@ -66,14 +74,15 @@ Alle timing-verdier skal ligge i `src/lib/constants.ts`:
 
 | Konstant | Verdi | Beskrivelse |
 |---|---|---|
-| COUNTDOWN_TIME | 5000 | Nedtelling før runde starter (ms) |
-| QUESTION_TIME | 15000 | Tid per spørsmål (ms) |
-| SHOW_ANSWER_TIME | 4000 | Vis riktig svar (ms) |
-| ROUND_END_TIME | 5000 | Vis leaderboard mellom runder (ms) |
-| POLL_INTERVAL | 2000 | Klient-polling intervall (ms) |
-| QUESTIONS_PER_ROUND | 3 | Antall spørsmål per runde |
-| TOTAL_ROUNDS | 5 | Antall runder per spill |
-| MIN_PLAYERS | 2 | Minimum spillere for å starte |
+| COUNTDOWN_TIME | 5000 | Nedtelling før spillet starter (ms) |
+| QUESTION_TIME | 10000 | Tid per spørsmål (ms) |
+| SHOW_ANSWER_TIME | 3000 | Vis riktig svar (ms) |
+| TOPIC_SELECTION_TIME | 15000 | Tid for vinneren å velge neste tema (ms) |
+| POLL_INTERVAL | 1000 | Klient-polling intervall (ms) |
+| QUESTIONS_PER_ROUND | 3 | Antall spørsmål per temarunde |
+| ALTERNATIVES_PER_QUESTION | 4 | Antall svaralternativer |
+| MIN_PLAYERS | 1 | Minimum spillere for å starte |
+| INACTIVE_TIMEOUT | 10000 | Tid uten polling før spiller regnes som inaktiv (ms) |
 
 ## Kodestil
 
@@ -100,6 +109,7 @@ src/
 │   │   ├── game-state/route.ts        # GET: poll game state
 │   │   ├── join/route.ts              # POST: registrer spiller (krever session)
 │   │   ├── answer/route.ts            # POST: registrer svar (krever session)
+│   │   ├── select-topic/route.ts      # POST: vinneren velger neste tema (krever session)
 │   │   └── generate-questions/route.ts  # POST: generer spørsmål
 │   ├── layout.tsx
 │   └── page.tsx                       # Hele UI-et (use client)
