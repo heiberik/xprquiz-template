@@ -84,6 +84,13 @@ Alle timing-verdier skal ligge i `src/lib/constants.ts`:
 | MIN_PLAYERS | 1 | Minimum spillere for å starte |
 | INACTIVE_TIMEOUT | 10000 | Tid uten polling før spiller regnes som inaktiv (ms) |
 
+## Tone og stil
+
+- Svar kort og direkte — ingen fyllord eller unødvendig forklaring
+- Vær objektiv — ingen emojier, ingen entusiasme, ingen "Great question!"
+- Led med svaret, ikke resonnementet
+- Hvis det kan sies i én setning, bruk én setning
+
 ## Kodestil
 
 - Alltid async/await (ingen .then()-chains)
