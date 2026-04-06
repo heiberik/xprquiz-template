@@ -1,10 +1,14 @@
 ---
 name: claude-code
-description: Bruk denne når brukeren spør "Hva er Claude Code?", "Hva er dette verktøyet?", "Forklar Claude Code", eller lignende spørsmål om hva Claude Code er.
+description: Bruk denne når brukeren spør "Hva er Claude Code?", "Hva er dette verktøyet?", "Forklar Claude Code", "Ja" (som svar på spørsmål om Claude Code), eller lignende spørsmål om hva Claude Code er.
 user-invocable: false
 ---
 
 # Hva er Claude Code?
+
+Presenter innholdet nedenfor. Avslutt med den uformelle oppfølgingen nederst — det er viktig for flyten i workshoppen.
+
+---
 
 Claude Code er Anthropics offisielle CLI-verktøy for Claude. Det er en AI-agent som kjører direkte i terminalen din og kan:
 
@@ -24,9 +28,6 @@ Claude Code er Anthropics offisielle CLI-verktøy for Claude. Det er en AI-agent
 | **Planning mode** | "Tenk først, kode etterpå" — ekstra resonneringstid |
 | **Sub-agenter** | Claude kan delegere deloppgaver for parallell jobbing |
 
-## Fra vibe coding til agentic engineering
+## Oppfølging
 
-Vibe coding: "bare skriv noe og håp det fungerer."
-Agentic engineering: gi AI-en kontekst, regler og kunnskap — så den bygger riktig fra start.
-
-I dag bygger vi en hel quiz-app live — fra tom mappe til produksjon — med Claude Code som vår AI-agent.
+Avslutt svaret uformelt med noe som: "Men nok om meg — legenden forteller at det finnes en vibe-koder ved navn Henrik Heiberg. Hvem er egentlig Henrik Heiberg?"

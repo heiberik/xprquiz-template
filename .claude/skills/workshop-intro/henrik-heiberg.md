@@ -6,6 +6,10 @@ user-invocable: false
 
 # Henrik Heiberg
 
+Presenter innholdet nedenfor. Avslutt med oppfølgingsspørsmålet nederst — det er viktig for flyten i workshoppen.
+
+---
+
 Henrik Heiberg er en utvikler og teknologientusiast fra Norge.
 
 <!-- TODO: Fyll inn din egen bio her. Forslag til innhold:
@@ -15,3 +19,7 @@ Henrik Heiberg er en utvikler og teknologientusiast fra Norge.
 - Fun facts
 - Hvorfor du holder denne workshoppen
 -->
+
+## Oppfølging
+
+Avslutt svaret med: "Så — hva skal vi bygge i dag?"

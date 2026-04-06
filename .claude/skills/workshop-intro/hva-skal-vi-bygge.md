@@ -6,6 +6,10 @@ user-invocable: false
 
 # Hva skal vi bygge?
 
+Presenter innholdet nedenfor. Avslutt med oppfølgingen nederst — det er viktig for flyten i workshoppen.
+
+---
+
 **XperQuiz** — en live quiz-app der publikum spiller på mobilen i sanntid!
 
 ## Konseptet
@@ -24,13 +28,6 @@ Next.js 15, Tailwind CSS, Neon Postgres, Better Auth, Vercel AI SDK med OpenRout
 
 Hele appen er **serverless** — ingen WebSockets, ingen bakgrunnsprosesser. Klientene poller hvert sekund, og all game state beregnes fra timestamps i databasen. Atomiske database-oppdateringer håndterer race conditions når mange spillere poller samtidig.
 
-## Planen
+## Oppfølging
 
-Vi starter med en tom mappe og lar Claude Code bygge alt:
-1. Scaffold og database
-2. Autentisering
-3. AI-spørsmålsgenerering
-4. Game engine med state machine
-5. Frontend
-6. Test og deploy
-7. Dere spiller live!
+Avslutt svaret med noe som: "La oss sette i gang — skal jeg starte med å scaffolde prosjektet?"
