@@ -42,19 +42,20 @@ Spillere må logge inn for å spille. Better Auth håndterer autentisering:
 - Spillernavn hentes fra auth-brukerens `name`-felt ved registrering
 
 ## State Machine
+
 waiting_for_players
-→ countdown (5s)                    [triggers ved 1+ spillere]
-→ generating                      [AI lager 3 spørsmål, tilfeldig tema første gang]
-→ question_active (10s)         [spørsmål 1, 4 alternativer]
+→ countdown (5s) [triggers ved 1+ spillere]
+→ generating [AI lager 3 spørsmål, tilfeldig tema første gang]
+→ question_active (10s) [spørsmål 1, 4 alternativer]
 → showing_answer (3s)
-→ question_active (10s)     [spørsmål 2, 4 alternativer]
+→ question_active (10s) [spørsmål 2, 4 alternativer]
 → showing_answer (3s)
 → question_active (10s) [spørsmål 3, 4 alternativer]
 → showing_answer (3s)
-→ topic_selection (15s)  [vis leaderboard + vinneren av denne runden velger neste tema]
-→ generating             [AI lager 3 nye spørsmål basert på valgt tema]
-→ ...                    [løkke fortsetter]
-→ waiting_for_players    [når ingen aktive spillere gjenstår]
+→ topic_selection (15s) [vis leaderboard + vinneren av denne runden velger neste tema]
+→ generating [AI lager 3 nye spørsmål basert på valgt tema]
+→ ... [løkke fortsetter]
+→ waiting_for_players [når ingen aktive spillere gjenstår]
 
 Ingen runder eller `game_over` — spillet kjører kontinuerlig i en løkke: 3 spørsmål → leaderboard + temavalg → 3 spørsmål → ...
 Spillet starter automatisk når første spiller joiner. Ingen admin-funksjonalitet.
@@ -72,24 +73,17 @@ Spillere må være innlogget for å se `waiting_for_players`-skjermen og joine.
 
 Alle timing-verdier skal ligge i `src/lib/constants.ts`:
 
-| Konstant | Verdi | Beskrivelse |
-|---|---|---|
-| COUNTDOWN_TIME | 5000 | Nedtelling før spillet starter (ms) |
-| QUESTION_TIME | 10000 | Tid per spørsmål (ms) |
-| SHOW_ANSWER_TIME | 3000 | Vis riktig svar (ms) |
-| TOPIC_SELECTION_TIME | 15000 | Tid for vinneren å velge neste tema (ms) |
-| POLL_INTERVAL | 1000 | Klient-polling intervall (ms) |
-| QUESTIONS_PER_ROUND | 3 | Antall spørsmål per temarunde |
-| ALTERNATIVES_PER_QUESTION | 4 | Antall svaralternativer |
-| MIN_PLAYERS | 1 | Minimum spillere for å starte |
-| INACTIVE_TIMEOUT | 10000 | Tid uten polling før spiller regnes som inaktiv (ms) |
-
-## Tone og stil
-
-- Svar kort og direkte — ingen fyllord eller unødvendig forklaring
-- Vær objektiv — ingen emojier, ingen entusiasme, ingen "Great question!"
-- Led med svaret, ikke resonnementet
-- Hvis det kan sies i én setning, bruk én setning
+| Konstant                  | Verdi | Beskrivelse                                          |
+| ------------------------- | ----- | ---------------------------------------------------- |
+| COUNTDOWN_TIME            | 5000  | Nedtelling før spillet starter (ms)                  |
+| QUESTION_TIME             | 10000 | Tid per spørsmål (ms)                                |
+| SHOW_ANSWER_TIME          | 3000  | Vis riktig svar (ms)                                 |
+| TOPIC_SELECTION_TIME      | 15000 | Tid for vinneren å velge neste tema (ms)             |
+| POLL_INTERVAL             | 1000  | Klient-polling intervall (ms)                        |
+| QUESTIONS_PER_ROUND       | 3     | Antall spørsmål per temarunde                        |
+| ALTERNATIVES_PER_QUESTION | 4     | Antall svaralternativer                              |
+| MIN_PLAYERS               | 1     | Minimum spillere for å starte                        |
+| INACTIVE_TIMEOUT          | 10000 | Tid uten polling før spiller regnes som inaktiv (ms) |
 
 ## Kodestil
 
@@ -100,6 +94,7 @@ Alle timing-verdier skal ligge i `src/lib/constants.ts`:
 - Feilhåndtering med try/catch og meningsfulle feilmeldinger
 
 ## Kommandoer
+
 ```bash
 npm run dev          # Start utviklingsserver
 npm run build        # Bygg for produksjon
@@ -109,27 +104,28 @@ vercel --prod        # Deploy til Vercel
 ```
 
 ## Mappestruktur
+
 src/
 ├── app/
-│   ├── api/
-│   │   ├── auth/[...all]/route.ts     # Better Auth catch-all
-│   │   ├── game-state/route.ts        # GET: poll game state
-│   │   ├── join/route.ts              # POST: registrer spiller (krever session)
-│   │   ├── answer/route.ts            # POST: registrer svar (krever session)
-│   │   ├── select-topic/route.ts      # POST: vinneren velger neste tema (krever session)
-│   │   └── generate-questions/route.ts  # POST: generer spørsmål
-│   ├── layout.tsx
-│   └── page.tsx                       # Hele UI-et (use client)
+│ ├── api/
+│ │ ├── auth/[...all]/route.ts # Better Auth catch-all
+│ │ ├── game-state/route.ts # GET: poll game state
+│ │ ├── join/route.ts # POST: registrer spiller (krever session)
+│ │ ├── answer/route.ts # POST: registrer svar (krever session)
+│ │ ├── select-topic/route.ts # POST: vinneren velger neste tema (krever session)
+│ │ └── generate-questions/route.ts # POST: generer spørsmål
+│ ├── layout.tsx
+│ └── page.tsx # Hele UI-et (use client)
 └── lib/
-    ├── auth.ts                        # Better Auth server config
-    ├── auth-client.ts                 # Better Auth klient
-    ├── ai.ts                          # OpenRouter provider setup
-    ├── constants.ts                   # Timing-konstanter
-    ├── types.ts                       # TypeScript-typer
-    ├── game-logic.ts                  # Ren state-beregning
-    ├── ai/
-    │   └── generate-questions.ts      # Quiz-generering med prompt
-    └── db/
-        ├── index.ts                   # Neon connection
-        ├── schema.ts                  # Drizzle schema
-        └── queries.ts                 # Database-queries
+├── auth.ts # Better Auth server config
+├── auth-client.ts # Better Auth klient
+├── ai.ts # OpenRouter provider setup
+├── constants.ts # Timing-konstanter
+├── types.ts # TypeScript-typer
+├── game-logic.ts # Ren state-beregning
+├── ai/
+│ └── generate-questions.ts # Quiz-generering med prompt
+└── db/
+├── index.ts # Neon connection
+├── schema.ts # Drizzle schema
+└── queries.ts # Database-queries
