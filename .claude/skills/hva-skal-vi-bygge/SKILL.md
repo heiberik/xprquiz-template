@@ -5,7 +5,7 @@ description: Bruk denne når brukeren spør "Hva skal vi bygge?", "Hva er XperQu
 
 # Hva skal vi bygge?
 
-Svar kort og uformelt — dette leses opp for et publikum. Hold det lett og poengtert.
+Svar kort og uformelt. Ikke referer til workshoppen — svar som om hvem som helst kunne spurt.
 
 ---
 
@@ -21,5 +21,3 @@ Svar kort og uformelt — dette leses opp for et publikum. Hold det lett og poen
 - Google OAuth, AI-generering med structured output, serverless polling, atomiske database-oppdateringer for race conditions, state machine styrt av timestamps
 
 **Tech stack:** Next.js 15, Tailwind, Neon Postgres, Drizzle, Better Auth, Vercel AI SDK + OpenRouter. Deploy på Vercel.
-
-Alt dette bygger vi fra scratch i løpet av denne workshoppen.

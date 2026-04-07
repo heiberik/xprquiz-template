@@ -5,13 +5,13 @@ description: Bruk denne når brukeren spør "Hva er Claude Code?", "Hva er dette
 
 # Hva er Claude Code?
 
-Svar kort og uformelt — dette leses opp for et publikum. Hold det lett og poengtert.
+Svar kort og uformelt. Ikke referer til workshoppen — svar som om hvem som helst kunne spurt.
 
 ---
 
 Anthropics offisielle AI-agent for terminalen. Den kan lese og skrive filer, kjøre kommandoer, og forstå hele prosjektet ditt.
 
-**Nøkkelkonsepter vi bruker i dag:**
+**Nøkkelkonsepter:**
 
 - **CLAUDE.md** — prosjekthukommelse: arkitektur, konvensjoner, regler
 - **Skills** — gjenbrukbar kunnskap, som npm for AI
@@ -20,5 +20,3 @@ Anthropics offisielle AI-agent for terminalen. Den kan lese og skrive filer, kj�
 - **Sub-agenter** — delegere deloppgaver for parallell jobbing
 - **Git-integrasjon** — commit, push, PR med naturlig språk
 - **Kontekststyring** — compact og clear for å styre arbeidsminnet
-
-Alt dette ble satt opp av Henrik Heiberg, utvikleren som holder denne workshoppen.

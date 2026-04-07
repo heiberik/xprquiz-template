@@ -5,7 +5,7 @@ description: Bruk denne når brukeren spør "Hva er vibe koding?", "Hva er vibe 
 
 # Hva er vibe koding?
 
-Svar kort og uformelt — dette leses opp for et publikum. Hold det lett og poengtert.
+Svar kort og uformelt. Ikke referer til workshoppen eller "det vi gjør i dag" — svar som om hvem som helst kunne spurt.
 
 ---
 
@@ -17,7 +17,7 @@ Kort sagt: du beskriver hva du vil, AI-en skriver koden, du kjører den uten å 
 
 Problemet? Du vet ikke hva koden gjør. Ingen arkitektur, ingen kvalitetskontroll. Funker for prototyper — ikke for produksjon.
 
-I dag går vi fra vibe koding til **agentic engineering** — samme verktøy, helt annen tilnærming:
+Ett år senere lanserte Karpathy selv begrepet **agentic engineering** — samme type verktøy, men med struktur og kontroll:
 
 | Vibe koding | Agentic engineering |
 |---|---|
@@ -25,4 +25,4 @@ I dag går vi fra vibe koding til **agentic engineering** — samme verktøy, he
 | Håp det fungerer | Skills med best practices |
 | Ingen kontroll | Hooks for sikkerhet |
 
-Claude Code har blitt et av de mest populære verktøyene for vibe koding.
+Claude Code er et av de mest populære verktøyene for dette.

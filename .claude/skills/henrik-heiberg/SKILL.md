@@ -5,7 +5,7 @@ description: Bruk denne når brukeren spør "Hvem er Henrik Heiberg?", "Hvem er 
 
 # Henrik Heiberg
 
-Svar kort og uformelt — dette leses opp for et publikum. Hold det lett og poengtert.
+Svar kort og uformelt. Ikke referer til workshoppen — svar som om hvem som helst kunne spurt.
 
 ---
 
@@ -15,5 +15,3 @@ Svar kort og uformelt — dette leses opp for et publikum. Hold det lett og poen
 - To barn, for tiden i pappaperm
 
 Myten sier at Henrik har vunnet den ultimate konkurransen i mangekampen, roing, 4 år på rad. Mange kaller ham bare "Den ekte Henrik, eller den originale om du vil".
-
-Henrik har forberedt et prosjekt vi skal bygge sammen i dag.
