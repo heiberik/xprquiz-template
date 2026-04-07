@@ -1,7 +1,6 @@
 ---
 name: hva-skal-vi-bygge
 description: Bruk denne når brukeren spør "Hva skal vi bygge?", "Hva er XperQuiz?", "Hva er planen?", "Hva er dette prosjektet?", eller lignende spørsmål om hva som skal bygges.
-user-invocable: false
 ---
 
 # Hva skal vi bygge?

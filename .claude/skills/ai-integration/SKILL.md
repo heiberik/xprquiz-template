@@ -4,10 +4,6 @@ description: >
   Integrasjonsmønstre for OpenRouter og Vercel AI SDK for AI-drevet quiz-spørsmålsgenerering.
   Dekker provider-oppsett, modellvalg (openai/gpt-5.4-mini via OpenRouter), generateObject
   med Zod-schema for strukturert output, prompt engineering-teknikker og output-validering.
-user-invocable: false
-paths:
-  - src/lib/ai.ts
-  - src/lib/ai/**
 ---
 
 # AI-integrasjon — OpenRouter + Vercel AI SDK

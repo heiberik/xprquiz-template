@@ -1,7 +1,6 @@
 ---
 name: vibe-koding
 description: Bruk denne når brukeren spør "Hva er vibe koding?", "Hva er vibe coding?", "Forklar vibe coding", eller lignende spørsmål om vibe koding/coding.
-user-invocable: true
 ---
 
 # Hva er vibe koding?

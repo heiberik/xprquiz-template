@@ -1,7 +1,6 @@
 ---
 name: claude-code
 description: Bruk denne når brukeren spør "Hva er Claude Code?", "Hva er dette verktøyet?", "Forklar Claude Code", "Ja" (som svar på spørsmål om Claude Code), eller lignende spørsmål om hva Claude Code er.
-user-invocable: false
 ---
 
 # Hva er Claude Code?

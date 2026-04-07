@@ -23,6 +23,6 @@
 - Vise frem CLAUDE.md
   - Denne har jeg speccet frem ved hjelp av sjefen selv på forhånd. Dette er forhåpentligvis det som skal redde meg i dag.
   - CLAUDE.md filer kan også legges til i undermapper og blir da hentet inn i konteksten kun når den er relevant.
-  - Kan også legge til .cursor/rules filer.
+- Vise frem .cursor/rules filer.
 
 -

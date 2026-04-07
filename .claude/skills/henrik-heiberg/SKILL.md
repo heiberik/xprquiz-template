@@ -1,7 +1,6 @@
 ---
 name: henrik-heiberg
 description: Bruk denne når brukeren spør "Hvem er Henrik Heiberg?", "Hvem er Henrik?", "Fortell om Henrik", eller lignende spørsmål om Henrik Heiberg.
-user-invocable: false
 ---
 
 # Henrik Heiberg
