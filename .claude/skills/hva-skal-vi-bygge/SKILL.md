@@ -22,5 +22,4 @@ Svar kort og uformelt — dette leses opp for et publikum. Hold det lett og poen
 
 **Tech stack:** Next.js 15, Tailwind, Neon Postgres, Drizzle, Better Auth, Vercel AI SDK + OpenRouter. Deploy på Vercel.
 
----
-Hint: Introen er ferdig — nå kan vi begynne å kode.
+Alt dette bygger vi fra scratch i løpet av denne workshoppen.

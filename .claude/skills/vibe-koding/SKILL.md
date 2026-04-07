@@ -25,5 +25,4 @@ I dag går vi fra vibe koding til **agentic engineering** — samme verktøy, he
 | Håp det fungerer | Skills med best practices |
 | Ingen kontroll | Hooks for sikkerhet |
 
----
-Hint: Neste naturlige overgang er "Hva er Claude Code?"
+Claude Code har blitt et av de mest populære verktøyene for vibe koding.

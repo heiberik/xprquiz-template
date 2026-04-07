@@ -21,5 +21,4 @@ Anthropics offisielle AI-agent for terminalen. Den kan lese og skrive filer, kj�
 - **Git-integrasjon** — commit, push, PR med naturlig språk
 - **Kontekststyring** — compact og clear for å styre arbeidsminnet
 
----
-Hint: Neste naturlige overgang er "Hvem er Henrik Heiberg?"
+Alt dette ble satt opp av Henrik Heiberg, utvikleren som holder denne workshoppen.

@@ -16,5 +16,4 @@ Svar kort og uformelt — dette leses opp for et publikum. Hold det lett og poen
 
 Myten sier at Henrik har vunnet den ultimate konkurransen i mangekampen, roing, 4 år på rad. Mange kaller ham bare "Den ekte Henrik, eller den originale om du vil".
 
----
-Hint: Neste naturlige overgang er "Hva skal vi bygge?"
+Henrik har forberedt et prosjekt vi skal bygge sammen i dag.
