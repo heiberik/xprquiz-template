@@ -5,30 +5,21 @@ description: Bruk denne når brukeren spør "Hva er Claude Code?", "Hva er dette
 
 # Hva er Claude Code?
 
-Presenter innholdet nedenfor. Avslutt med den uformelle oppfølgingen nederst — det er viktig for flyten i workshoppen.
+Svar kort og uformelt — dette leses opp for et publikum. Hold det lett og poengtert.
 
 ---
 
-Claude Code er Anthropics offisielle CLI-verktøy for Claude. Det er en AI-agent som kjører direkte i terminalen din og kan:
+Anthropics offisielle AI-agent for terminalen. Den kan lese og skrive filer, kjøre kommandoer, og forstå hele prosjektet ditt.
 
-- **Lese og skrive filer** i prosjektet ditt
-- **Kjøre kommandoer** i terminalen (npm, git, curl, osv.)
-- **Forstå hele prosjektet** — den leser CLAUDE.md, skills, og kildekode automatisk
-- **Planlegge før den koder** — planning mode for komplekse oppgaver
-- **Feilsøke iterativt** — leser feilmeldinger og retter selv
+**Nøkkelkonsepter vi bruker i dag:**
 
-## Nøkkelkonsepter vi bruker i dag
+- **CLAUDE.md** — prosjekthukommelse: arkitektur, konvensjoner, regler
+- **Skills** — gjenbrukbar kunnskap, som npm for AI
+- **Hooks** — automatiske sikkerhetshooks som reiser med prosjektet
+- **Planning mode** — "tenk først, kode etterpå"
+- **Sub-agenter** — delegere deloppgaver for parallell jobbing
+- **Git-integrasjon** — commit, push, PR med naturlig språk
+- **Kontekststyring** — compact og clear for å styre arbeidsminnet
 
-| Konsept | Hva det gjør |
-|---------|-------------|
-| **CLAUDE.md** | Prosjekthukommelse — arkitektur, konvensjoner, regler |
-| **Skills** | Gjenbrukbar kunnskap (som npm for AI) — custom eller third-party |
-| **Hooks** | Automatiske sikkerhetshooks som reiser med prosjektet |
-| **Planning mode** | "Tenk først, kode etterpå" — ekstra resonneringstid |
-| **Sub-agenter** | Claude kan delegere deloppgaver for parallell jobbing |
-| **Git-integrasjon** | Commite, pushe, lage PR — hele git-workflowen med naturlig språk |
-| **Kontekststyring** | Compact og clear — arbeidsminne med CLAUDE.md som langtidshukommelse |
-
-## Oppfølging
-
-Avslutt svaret uformelt med noe som: "Men nok om meg — legenden forteller at det finnes en vibe-koder ved navn Henrik Heiberg. Hvem er egentlig Henrik Heiberg?"
+---
+Hint: Neste naturlige overgang er "Hvem er Henrik Heiberg?"

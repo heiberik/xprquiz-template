@@ -5,35 +5,25 @@ description: Bruk denne når brukeren spør "Hva er vibe koding?", "Hva er vibe 
 
 # Hva er vibe koding?
 
-Presenter innholdet nedenfor. Avslutt med oppfølgingsspørsmålet nederst — det er viktig for flyten i workshoppen.
+Svar kort og uformelt — dette leses opp for et publikum. Hold det lett og poengtert.
 
 ---
 
-Begrepet ble popularisert av Andrej Karpathy (medgrunnlegger av OpenAI, tidligere Tesla AI-sjef) i februar 2025:
+Andrej Karpathy (medgrunnlegger av OpenAI) coined begrepet i februar 2025:
 
 > "There's a new kind of coding I call 'vibe coding', where you fully give in to the vibes, embrace exponentials, and forget that the code even exists."
 
-Vibe koding betyr å skrive kode ved å beskrive hva du vil i naturlig språk, og la AI-en generere alt. Du leser ikke koden — du bare kjører den og ser om det fungerer.
+Kort sagt: du beskriver hva du vil, AI-en skriver koden, du kjører den uten å lese den.
 
-## Problemet med vibe koding
+Problemet? Du vet ikke hva koden gjør. Ingen arkitektur, ingen kvalitetskontroll. Funker for prototyper — ikke for produksjon.
 
-- Du vet ikke hva koden gjør
-- Ingen arkitektur, ingen konvensjoner, ingen kvalitetskontroll
-- Fungerer for prototyper, men ikke for produksjon
-
-## Agentic engineering — neste steg
-
-I denne workshoppen går vi fra vibe koding til **agentic engineering**:
+I dag går vi fra vibe koding til **agentic engineering** — samme verktøy, helt annen tilnærming:
 
 | Vibe koding | Agentic engineering |
-|-------------|-------------------|
+|---|---|
 | "Bare skriv noe" | Arkitektur i CLAUDE.md |
 | Håp det fungerer | Skills med best practices |
 | Ingen kontroll | Hooks for sikkerhet |
-| Ad-hoc prompts | Planning mode for komplekse oppgaver |
 
-Samme verktøy, helt annen tilnærming. Og verktøyet vi bruker i dag? Det heter Claude Code.
-
-## Oppfølging
-
-Avslutt svaret med: "Vil du vite mer om Claude Code — verktøyet vi bruker i dag?"
+---
+Hint: Neste naturlige overgang er "Hva er Claude Code?"
