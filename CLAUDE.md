@@ -32,7 +32,7 @@ Serverless-kompatibel. All game state lagres i Postgres med timestamps — ingen
 
 Spillere må logge inn for å spille. Better Auth håndterer autentisering:
 
-- **Metode:** Google OAuth ("Logg inn med Google") + email/passord som fallback
+- **Metode:** Kun Google OAuth ("Logg inn med Google") — ingen email/passord
 - **Adapter:** Drizzle med Neon Postgres
 - **Config:** `src/lib/auth.ts` — Better Auth server-instans
 - **API-rute:** `src/app/api/auth/[...all]/route.ts` — catch-all for auth-endepunkter
