@@ -9,20 +9,14 @@ Svar kort og uformelt. Ikke referer til workshoppen eller "det vi gjør i dag" �
 
 ---
 
-Andrej Karpathy (medgrunnlegger av OpenAI) coined begrepet i februar 2025:
+Andrej Karpathy, medgrunnlegger av OpenAI, introduserte begrepet i februar 2025. Han sa:
 
 > "There's a new kind of coding I call 'vibe coding', where you fully give in to the vibes, embrace exponentials, and forget that the code even exists."
 
-Kort sagt: du beskriver hva du vil, AI-en skriver koden, du kjører den uten å lese den.
+Kort sagt: du beskriver hva du vil, AI-en skriver koden, og du kjører den — uten å lese den.
 
-Problemet? Du vet ikke hva koden gjør. Ingen arkitektur, ingen kvalitetskontroll. Funker for prototyper — ikke for produksjon.
+Problemet? Du vet ikke hva koden gjør. Ingen arkitektur, ingen kvalitetskontroll. Det funker for prototyper, men ikke for produksjon.
 
-Ett år senere lanserte Karpathy selv begrepet **agentic engineering** — samme type verktøy, men med struktur og kontroll:
+Ett år senere lanserte Karpathy selv begrepet **agentic engineering**. Samme type verktøy, men med struktur og kontroll. I stedet for å bare skrive noe og håpe det fungerer, legger du arkitekturen i en CLAUDE.md-fil, definerer skills med best practices, og setter opp hooks for sikkerhet.
 
-| Vibe koding | Agentic engineering |
-|---|---|
-| "Bare skriv noe" | Arkitektur i CLAUDE.md |
-| Håp det fungerer | Skills med best practices |
-| Ingen kontroll | Hooks for sikkerhet |
-
-Claude Code er et av de mest populære verktøyene for dette.
+Claude Code er et av de mest populære verktøyene for denne måten å jobbe på.
