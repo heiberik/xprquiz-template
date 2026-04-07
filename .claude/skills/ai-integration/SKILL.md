@@ -2,7 +2,7 @@
 name: ai-integrasjon
 description: >
   Integrasjonsmønstre for OpenRouter og Vercel AI SDK for AI-drevet quiz-spørsmålsgenerering.
-  Dekker provider-oppsett, modellvalg (openai/gpt-5.4-mini via OpenRouter), generateObject
+  Dekker provider-oppsett, modellvalg (x-ai/grok-4.1-fast via OpenRouter), generateObject
   med Zod-schema for strukturert output, prompt engineering-teknikker og output-validering.
 ---
 
@@ -20,9 +20,9 @@ export const openrouter = createOpenRouter({
 
 ## Modell
 
-Bruk `openai/gpt-5.4-mini` som standard (rask, rimelig, mer enn god nok for quiz-generering). Modellen spesifiseres slik:
+Bruk `x-ai/grok-4.1-fast` som standard (rask, rimelig, mer enn god nok for quiz-generering). Modellen spesifiseres slik:
 ```typescript
-openrouter("openai/gpt-5.4-mini")
+openrouter("x-ai/grok-4.1-fast")
 ```
 
 ## Genereringsmetode
@@ -34,7 +34,7 @@ import { openrouter } from "@/lib/ai";
 import { z } from "zod";
 
 const { object: questions } = await generateObject({
-  model: openrouter("openai/gpt-5.4-mini"),
+  model: openrouter("x-ai/grok-4.1-fast"),
   schema: QuestionsSchema,
   prompt: "...",
 });
