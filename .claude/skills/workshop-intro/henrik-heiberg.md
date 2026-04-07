@@ -10,15 +10,13 @@ Presenter innholdet nedenfor. Avslutt med oppfølgingsspørsmålet nederst — d
 
 ---
 
-Henrik Heiberg er en utvikler og teknologientusiast fra Norge.
+Henrik Heiberg er jurist og utvikler i Experis, der han har jobbet de siste 5 årene. Han har vært utplassert hos Utdanningsdirektoratet i 5 år, der han jobber med utvikling av digitale løsninger for norsk utdanning.
 
-<!-- TODO: Fyll inn din egen bio her. Forslag til innhold:
-- Rolle og arbeidsplass
-- Bakgrunn og erfaring
-- Hva du brenner for
-- Fun facts
-- Hvorfor du holder denne workshoppen
--->
+Henrik jobber daglig med AI — både som utviklingsverktøy og ved å integrere AI i løsninger for kunden. Blant annet har han automatisert hele kvalitetssikringsprosessen for prøver og eksamener, der AI flagger feil i oppgavesett.
+
+Henrik har to barn og er for tiden i pappaperm.
+
+Myten sier at Henrik har vunnet den ultimate konkurransen i mangekampen, roing, 4 år på rad. Mange kaller ham bare "Den ekte Henrik, eller den originale om du vil".
 
 ## Oppfølging
 
