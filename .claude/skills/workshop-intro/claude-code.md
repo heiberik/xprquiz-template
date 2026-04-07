@@ -27,6 +27,8 @@ Claude Code er Anthropics offisielle CLI-verktøy for Claude. Det er en AI-agent
 | **Hooks** | Automatiske sikkerhetshooks som reiser med prosjektet |
 | **Planning mode** | "Tenk først, kode etterpå" — ekstra resonneringstid |
 | **Sub-agenter** | Claude kan delegere deloppgaver for parallell jobbing |
+| **Git-integrasjon** | Commite, pushe, lage PR — hele git-workflowen med naturlig språk |
+| **Kontekststyring** | Compact og clear — arbeidsminne med CLAUDE.md som langtidshukommelse |
 
 ## Oppfølging
 
