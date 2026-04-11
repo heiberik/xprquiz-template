@@ -2,8 +2,8 @@
 name: ai-integrasjon
 description: >
   Integrasjonsmønstre for OpenRouter og Vercel AI SDK for AI-drevet quiz-spørsmålsgenerering.
-  Dekker provider-oppsett, modellvalg (x-ai/grok-4.1-fast via OpenRouter), generateObject
-  med Zod-schema for strukturert output, prompt engineering-teknikker og output-validering.
+  Dekker provider-oppsett, modellvalg (x-ai/grok-4.1-fast via OpenRouter), generateText med
+  Output.object() og Zod-schema for strukturert output, prompt engineering-teknikker og output-validering.
 ---
 
 # AI-integrasjon — OpenRouter + Vercel AI SDK
@@ -27,18 +27,20 @@ openrouter("x-ai/grok-4.1-fast")
 
 ## Genereringsmetode
 
-Bruk `generateObject` fra Vercel AI SDK med Zod-schema for structured output. Dette gir typesikker output, automatisk validering, og retry ved schema-brudd.
+Bruk `generateText` med `Output.object()` fra Vercel AI SDK med Zod-schema for structured output. Dette gir typesikker output og automatisk validering.
 ```typescript
-import { generateObject } from "ai";
+import { generateText, Output } from "ai";
 import { openrouter } from "@/lib/ai";
 import { z } from "zod";
 
-const { object: questions } = await generateObject({
+const { experimental_output: result } = await generateText({
   model: openrouter("x-ai/grok-4.1-fast"),
-  schema: QuestionsSchema,
-  prompt: "...",
+  output: Output.object({ schema: QuestionsSchema }),
+  system: "Du er en erfaren quiz-master som lager spørsmål for en live quiz-konkurranse.",
+  prompt: `Lag 3 unike quiz-spørsmål om temaet: "${topic}"...`,
 });
-// questions er allerede typet og validert — ingen manuell parsing
+return result.questions;
+// result er allerede typet og validert — ingen manuell parsing
 ```
 
 ## Quiz-prompt
@@ -94,7 +96,7 @@ const QuestionsSchema = z.object({
   questions: z.array(QuestionSchema).length(3),
 });
 ```
-`generateObject` krever et objekt som toppnivå-schema — derfor wrapper vi arrayen i `{ questions: [...] }`.
+`Output.object()` krever et objekt som toppnivå-schema — derfor wrapper vi arrayen i `{ questions: [...] }`.
 
 ## Predefinerte temaer
 
@@ -122,4 +124,4 @@ const THEMES = [
 | **Chain of Thought** | "TENK STEG FOR STEG: 1. velg deltemaer..." | Tvinger modellen til systematisk gjennomgang |
 | **Few-shot examples** | To komplette JSON-eksempler | Viser eksakt ønsket format og kvalitetsnivå |
 | **Negative constraints** | "Ingen åpenbart dumme svar" | Forbedrer kvaliteten på distraktorer |
-| **Structured output** | Zod-schema via `generateObject` | Garantert gyldig, typesikker output — ingen manuell parsing |
+| **Structured output** | Zod-schema via `Output.object()` | Garantert gyldig, typesikker output — ingen manuell parsing |

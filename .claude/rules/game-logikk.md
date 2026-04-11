@@ -12,7 +12,7 @@ paths:
 ```
 waiting_for_players
   → countdown (5s)                    [1+ spillere]
-    → generating                      [AI lager 3 spørsmål]
+    → generating (30s timeout)        [AI lager 3 spørsmål]
       → question_active (10s)         [spørsmål 1]
         → showing_answer (3s)
       → question_active (10s)         [spørsmål 2]
@@ -20,7 +20,7 @@ waiting_for_players
       → question_active (10s)         [spørsmål 3]
         → showing_answer (3s)
       → topic_selection (15s)         [leaderboard + temavalg]
-        → generating                  [løkke fortsetter]
+        → generating (30s timeout)    [løkke fortsetter]
   → waiting_for_players               [0 aktive spillere]
 ```
 
@@ -47,3 +47,4 @@ waiting_for_players
 - Typer i `types.ts`, ikke inline
 - `correctIndex` aldri i klient-response under `question_active`
 - Spillere er aktive hvis de har pollet innen `INACTIVE_TIMEOUT` (10s)
+- `generating` har timeout (`GENERATING_TIMEOUT`) — faller tilbake til `waiting_for_players` hvis AI-generering tar for lang tid

@@ -4,11 +4,11 @@ Live quiz-app der publikum spiller på mobilen i sanntid. AI genererer spørsmå
 
 ## Tech Stack
 
-- **Framework:** Next.js 15 (App Router, TypeScript, src/)
+- **Framework:** Next.js (App Router, TypeScript, src/) — bruk `npx create-next-app@latest` ved opprettelse
 - **Styling:** Tailwind CSS 4
 - **Database:** Neon Postgres (`@neondatabase/serverless`)
 - **ORM:** Drizzle ORM
-- **Auth:** Better Auth (`better-auth`) med email/passord
+- **Auth:** Better Auth (`better-auth`) med Google OAuth
 - **AI:** Vercel AI SDK med OpenRouter (`@openrouter/ai-sdk-provider`)
 - **Deploy:** Vercel
 
@@ -24,6 +24,7 @@ Serverless-kompatibel. All game state lagres i Postgres med timestamps — ingen
 - `countdown → generating` og `topic_selection → generating` trigger AI-spørsmålsgenerering — kun requesten som vinner den atomiske overgangen starter genereringen
 - En spiller regnes som aktiv hvis de har pollet i løpet av de siste 10 sekundene — spillet går til `waiting_for_players` når ingen aktive spillere gjenstår
 - `correctIndex` sendes ALDRI til klienten under `question_active` — kun under `showing_answer`
+- `answers`-tabellen har FK til `questions` med `onDelete: 'cascade'` — svar slettes automatisk når spørsmål slettes mellom runder
 - Scoring: raskere svar = mer poeng. Maks 1000, min 100, lineær interpolering basert på tid brukt
 - Én enkelt side (`src/app/page.tsx`) med ulike visninger basert på game state
 - Temaer velges tilfeldig fra en predefinert liste
@@ -45,7 +46,7 @@ Spillere må logge inn for å spille. Better Auth håndterer autentisering:
 
 waiting_for_players
 → countdown (5s) [triggers ved 1+ spillere]
-→ generating [AI lager 3 spørsmål, tilfeldig tema første gang]
+→ generating (30s timeout) [AI lager 3 spørsmål, tilfeldig tema første gang]
 → question_active (10s) [spørsmål 1, 4 alternativer]
 → showing_answer (3s)
 → question_active (10s) [spørsmål 2, 4 alternativer]
@@ -53,13 +54,14 @@ waiting_for_players
 → question_active (10s) [spørsmål 3, 4 alternativer]
 → showing_answer (3s)
 → topic_selection (15s) [vis leaderboard + vinneren av denne runden velger neste tema]
-→ generating [AI lager 3 nye spørsmål basert på valgt tema]
+→ generating (30s timeout) [AI lager 3 nye spørsmål basert på valgt tema]
 → ... [løkke fortsetter]
 → waiting_for_players [når ingen aktive spillere gjenstår]
 
 Ingen runder eller `game_over` — spillet kjører kontinuerlig i en løkke: 3 spørsmål → leaderboard + temavalg → 3 spørsmål → ...
 Spillet starter automatisk når første spiller joiner. Ingen admin-funksjonalitet.
 Spillet stopper og går tilbake til `waiting_for_players` når ingen spillere har pollet de siste 10 sekundene.
+Hvis AI-generering tar lenger enn `GENERATING_TIMEOUT` (30s), faller spillet tilbake til `waiting_for_players` for å unngå at spillet henger.
 
 **Temavalg:** Etter hver runde med 3 spørsmål får spilleren med høyest score på den runden 15 sekunder til å velge neste tema via fritekst-input (`POST /api/select-topic`). Hvis vinneren ikke velger innen tiden, velger AI et tilfeldig tema.
 
@@ -84,6 +86,7 @@ Alle timing-verdier skal ligge i `src/lib/constants.ts`:
 | ALTERNATIVES_PER_QUESTION | 4     | Antall svaralternativer                              |
 | MIN_PLAYERS               | 1     | Minimum spillere for å starte                        |
 | INACTIVE_TIMEOUT          | 10000 | Tid uten polling før spiller regnes som inaktiv (ms) |
+| GENERATING_TIMEOUT        | 30000 | Timeout for AI-generering — fallback til waiting_for_players (ms) |
 
 ## Kodestil
 
@@ -102,6 +105,10 @@ npx drizzle-kit push # Push schema til database
 npx drizzle-kit studio # Åpne Drizzle Studio
 vercel --prod        # Deploy til Vercel
 ```
+
+## Miljøvariabler
+
+Kopier `.env.example` til `.env` og fyll inn verdiene. Bruk `.env` (IKKE `.env.local`) — alle environment-variabler samles i `.env`.
 
 ## Mappestruktur
 

@@ -25,4 +25,13 @@
   - CLAUDE.md filer kan også legges til i undermapper og blir da hentet inn i konteksten kun når den er relevant.
 - Vise frem .cursor/rules filer.
 
--
+- STARTE MED KODING:
+  - Sparre med claude code om hvordan å sette opp prosjektet.
+    - Bruke en CC for planlegging og orekstrering, andre CCer for å utføre.
+    - Komme frem til en stegvis plan: 5 steg?
+
+    - Be CC om prompts og parallelle spor?
+
+    - TING SOM MÅ MED:
+      - Plan mode. Bruke på første?
+      - ekstern skill for better-auth
