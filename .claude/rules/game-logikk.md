@@ -30,16 +30,27 @@ waiting_for_players
 
 ## Scoring
 
-- Raskere svar = mer poeng
+- Kun riktige svar gir poeng — feil svar gir alltid 0
+- For riktige svar: raskere svar = mer poeng
 - Maks 1000, min 100, lineær interpolering basert på tid brukt
+- Filtrer ALLTID svar på `correctIndex` før scoring-beregning
 - Poeng nullstilles etter hver 3-spørsmålsrunde
 - Leaderboard i `topic_selection` viser kun poeng fra siste runde
 
 ## Temavalg
 
 - Vinneren av runden får velge neste tema via fritekst (`POST /api/select-topic`)
-- Hvis vinneren ikke velger innen `TOPIC_SELECTION_TIME` — AI velger tilfeldig tema
+- `select-topic` lagrer tema OG trigger `topic_selection → generating` atomisk
+- `game-state` sin timeout trigges KUN hvis intet tema er valgt innen `TOPIC_SELECTION_TIME`
 - Første runde: tilfeldig tema fra predefinert liste
+
+## Reset mellom runder
+
+Ved overgang til `generating`:
+- `currentQuestionIndex` → 0
+- Alle spilleres poeng → 0
+- Slett eksisterende spørsmål (cascade sletter svar)
+- Frontend nullstiller all runde-spesifikk state ved overgang til `topic_selection` (tema-input, submitted-flagg)
 
 ## Regler
 

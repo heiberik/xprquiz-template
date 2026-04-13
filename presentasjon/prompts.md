@@ -14,6 +14,11 @@ Tenk steg for steg:
 Lag en overordnet 5-stegs plan. For eksempel:
 - Steg 1: Prosjektoppsett (dependencies, schema, typer)
 - Steg 2: Auth (bruk Better Auth MCP-serveren for oppslag)
-- ...der steg 3 og 4 kan kjøres i parallell.
+- Steg 3 og 4: to uavhengige backend-deler som kan kjøres parallelt
+- Steg 5: Frontend
+
+Viktig for steg-promptene du genererer:
+- Steg-promptene skal ALDRI motsi reglene i CLAUDE.md eller .claude/rules/. Hvis du er usikker, referer til CLAUDE.md fremfor å gi egne tekniske instruksjoner.
+- Ikke inkluder implementasjonsdetaljer som kodestil, feilhåndtering eller async-mønstre — det er allerede dekket av CLAUDE.md og rules.
 
 Ikke gi meg implementasjonsdetaljer ennå — bare den overordnede planen.

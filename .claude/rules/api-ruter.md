@@ -9,6 +9,7 @@ paths:
 - Zod-validering på alle API-inputs — valider body med `.safeParse()` og returner 400 ved feil
 - async/await, ingen `.then()`-chains
 - Feilhåndtering med try/catch og meningsfulle feilmeldinger
+- Alle asynkrone operasjoner som påvirker spilltilstand SKAL awaites — fire-and-forget er FORBUDT. Bruk async IIFE med try/catch og revert til `waiting_for_players` ved feil.
 
 ## Autentisering
 

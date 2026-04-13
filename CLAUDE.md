@@ -25,7 +25,7 @@ Serverless-kompatibel. All game state lagres i Postgres med timestamps — ingen
 - En spiller regnes som aktiv hvis de har pollet i løpet av de siste 10 sekundene — spillet går til `waiting_for_players` når ingen aktive spillere gjenstår
 - `correctIndex` sendes ALDRI til klienten under `question_active` — kun under `showing_answer`
 - `answers`-tabellen har FK til `questions` med `onDelete: 'cascade'` — svar slettes automatisk når spørsmål slettes mellom runder
-- Scoring: raskere svar = mer poeng. Maks 1000, min 100, lineær interpolering basert på tid brukt
+- Scoring: kun riktige svar gir poeng — feil svar gir alltid 0. For riktige svar: raskere svar = mer poeng. Maks 1000, min 100, lineær interpolering basert på tid brukt
 - Én enkelt side (`src/app/page.tsx`) med ulike visninger basert på game state
 - Temaer velges tilfeldig fra en predefinert liste
 
@@ -63,9 +63,15 @@ Spillet starter automatisk når første spiller joiner. Ingen admin-funksjonalit
 Spillet stopper og går tilbake til `waiting_for_players` når ingen spillere har pollet de siste 10 sekundene.
 Hvis AI-generering tar lenger enn `GENERATING_TIMEOUT` (30s), faller spillet tilbake til `waiting_for_players` for å unngå at spillet henger.
 
-**Temavalg:** Etter hver runde med 3 spørsmål får spilleren med høyest score på den runden 15 sekunder til å velge neste tema via fritekst-input (`POST /api/select-topic`). Hvis vinneren ikke velger innen tiden, velger AI et tilfeldig tema.
+**Temavalg:** Etter hver runde med 3 spørsmål får spilleren med høyest score på den runden 15 sekunder til å velge neste tema via fritekst-input (`POST /api/select-topic`). `POST /api/select-topic` lagrer temaet OG trigger overgangen `topic_selection → generating` umiddelbart — spillerne trenger ikke vente ut hele `TOPIC_SELECTION_TIME`. Hvis vinneren ikke velger innen tiden, velger `GET /api/game-state` sin timeout-logikk et tilfeldig tema og trigger overgangen.
 
 **Scoring:** Poeng nullstilles etter hver 3-spørsmålsrunde. Leaderboardet i `topic_selection` viser kun poeng fra de siste 3 spørsmålene.
+
+**Reset mellom runder:** Ved overgang til `generating` (fra både `countdown` og `topic_selection`) nullstilles:
+- `current_question_index` → 0
+- Alle spilleres poeng → 0
+- Eksisterende spørsmål slettes (cascade sletter svar)
+- Frontend: all runde-spesifikk UI-state nullstilles (valgt svar, tema-input, submitted-flagg)
 
 **Aktivitet:** Hver spiller har en `last_polled_at`-timestamp som oppdateres ved hver `GET /api/game-state`-request. Spillere som ikke har pollet innen `INACTIVE_TIMEOUT` regnes som inaktive.
 
